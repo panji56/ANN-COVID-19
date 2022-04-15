@@ -33,11 +33,15 @@
                             ?>
                                 <label for="neuron" class="col-sm-2 col-form-label">neuron:</label>
                                 <div class="col-sm-3">
-                                    <input type="text" name="neuron" id="neuron" class="form-control">
+                                    <input type="text" name="neuron" id="neuron" class="form-control" value="20">
                                 </div>
                                 <label for="dropout" class="col-sm-2 col-form-label">dropout_rate:</label>
                                 <div class="col-sm-3">
-                                <input type="text" name="dropout" id="dropout" class="form-control">
+                                <input type="text" name="dropout" id="dropout" class="form-control" value="0.1">
+                                </div>
+                                <label for="activation" class="col-sm-2 col-form-label">activation:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="activation" id="activation" class="form-control" value="sigmoid">
                                 </div>
                                 <br>
                             <?php
@@ -56,13 +60,13 @@
                         <div class="col-sm-9">
                             <input type="text" name="rh" id="rh" value="0.90" class="form-control">
                         </div>
-                        <label for="moment" class="col-sm-3 col-form-label">Rho:</label>
-                        <div class="col-sm-9">
-                            <input type="text" name="moment" id="moment" value="0.00" class="form-control">
-                        </div>
-                        <label for="eps" class="col-sm-3 col-form-label">Rho:</label>
+                        <label for="eps" class="col-sm-3 col-form-label">epsilon:</label>
                         <div class="col-sm-9">
                             <input type="text" name="eps" id="eps" value="1e-05" class="form-control">
+                        </div>
+                        <label for="eps" class="col-sm-3 col-form-label">Moment:</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="moment" id="moment" value="0.00" class="form-control">
                         </div>
                         <label for="epoch" class="col-sm-3 col-form-label">Epoch:</label>
                         <div class="col-sm-9">

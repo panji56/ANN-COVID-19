@@ -29,7 +29,7 @@ X_input_Test=mpu.io.read('../../X_input_Test.pickle')
 Y_input_Test=mpu.io.read('../../Y_input_Test.pickle')
 X_input_Test=pd.DataFrame(X_input_Test)
 # Y_input_Test=pd.DataFrame(Y_input_Test)
-ANN_COVID19=load_model("../../COVID19-ANN(TA).h5",custom_objects={"root_mean_squared_error": root_mean_squared_error})
+ANN_COVID19=load_model("../../COVID19-ANN(SA).h5",custom_objects={"root_mean_squared_error": root_mean_squared_error})
 
 
 #evaluate the model

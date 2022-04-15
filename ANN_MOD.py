@@ -15,7 +15,7 @@ def func_error(y_true,y_pred):
     return (y_pred - y_true)
 
 #define model
-def model_create(layercount,neuron,dropout,l_rate,rh,moment,eps):
+def model_create(layercount,neuron,dropout,activation,l_rate,rh,moment,eps):
 
     #create the model
     model = tf.keras.Sequential()
@@ -26,12 +26,12 @@ def model_create(layercount,neuron,dropout,l_rate,rh,moment,eps):
         model.add(tf.keras.layers.Dropout(rate=float(dropout[x])))
 
         #create First hidden layer
-        model.add(tf.keras.layers.Dense(int(neuron[x]), activation='relu'))
+        model.add(tf.keras.layers.Dense(int(neuron[x]), activation=str(activation[x])))
 
     #create output layer
-    model.add(tf.keras.layers.Dense(1, activation='relu'))
+    model.add(tf.keras.layers.Dense(1, activation='linear'))
 
-    #define the optimizer
+    # define the optimizer
     Optimizer=tf.keras.optimizers.RMSprop(
         learning_rate=float(l_rate), 
         rho=float(rh), 
@@ -39,6 +39,19 @@ def model_create(layercount,neuron,dropout,l_rate,rh,moment,eps):
         epsilon=float(eps), 
         centered=False,
         name='RMSprop')
+
+    # Optimizer=tf.keras.optimizers.Adadelta(
+    #     learning_rate=float(l_rate), 
+    #     rho=float(rh), 
+    #     epsilon=float(eps), 
+    #     name='Adadelta')
+
+    # Optimizer=tf.keras.optimizers.Nadam(
+    #     learning_rate=float(l_rate), 
+    #     beta_1=0.9,
+    #     beta_2=0.999, 
+    #     epsilon=float(eps), 
+    #     name='Nadam')
 
     #compiling ANN
     model.compile(optimizer=Optimizer,loss=root_mean_squared_error,metrics=['mae','mape'])

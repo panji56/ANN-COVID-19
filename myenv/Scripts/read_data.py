@@ -97,10 +97,10 @@ selection=[
 'cumulative_all_vaccinated',#orang 1 dari 2 dosis	
 'cumulative_all_fully_vaccinated',#orang 1 dari 1 dan 2 dari 2 dosis
 'cumulative_all_effectively_vaccinated',#orang 2 dari 2 dosis
-#----infections
-'infection_fatality',#
-'infection_detection',#
-'infection_hospitalization'#
+#----infections rate
+'infection_fatality',# IFR
+'infection_detection',# IDR
+'infection_hospitalization'# IHR
 ]
 data_input=ALL_DATA[selection]
 

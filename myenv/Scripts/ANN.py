@@ -25,6 +25,7 @@ from ANN_MOD import model_create
 #get data from POST request
 form = cgi.FieldStorage()
 
+activation = form.getvalue('activation')
 neuron = form.getvalue('neuron')
 dropout = form.getvalue('dropout')
 layercount = form.getvalue('layercount')
@@ -39,6 +40,8 @@ if not (isinstance(neuron, list)):
     neuron=[neuron]
 if not (isinstance(dropout, list)):
     dropout=[dropout]
+if not (isinstance(activation, list)):
+    activation=[activation]
 
 #loading dataset
 X_input_Train=mpu.io.read('../../X_input_Train.pickle')
@@ -52,17 +55,11 @@ ck = tf.keras.callbacks.ModelCheckpoint("../../COVID19-ANN(SA).h5", save_best_on
 #define model by calling function model_create() from ANN_MOD module,
 #then fit it with training data
 
-ANN_COVID19=model_create(layercount,neuron,dropout,l_rate,rh,moment,eps)
+ANN_COVID19=model_create(layercount,neuron,dropout,activation,l_rate,rh,moment,eps)
 
 #fit the ANN
-History=ANN_COVID19.fit(X_input_Train,Y_input_Train,epochs = int(epoch),callbacks=[ck],validation_split=0.33,verbose=0)
+History=ANN_COVID19.fit(X_input_Train,Y_input_Train,epochs = int(epoch),callbacks=[ck],validation_split=0.20,verbose=0,shuffle=True)
 
-#evaluation score
-scores=ANN_COVID19.evaluate(X_input_Train,Y_input_Train,verbose=0)
-#print the score
-S=str(scores)+"<br>"
-S=bytes(S,'utf-8')
-sys.stdout.buffer.write(S)
 
 #visualise the loss
 
@@ -92,6 +89,11 @@ S=bytes(S, 'utf-8')
 sys.stdout.buffer.write(S)
 
 ImgFile.close()
+
+#print the score
+S="<br> RMSE Train : "+str(ANN_History.loc[epochs-1,'loss'])+" RMSE Valid : "+str(ANN_History.loc[epochs-1,'val_loss'])+"<br>"
+S=bytes(S,'utf-8')
+sys.stdout.buffer.write(S)
 
 sys.stdout.buffer.write(b"</body>\n")
 
